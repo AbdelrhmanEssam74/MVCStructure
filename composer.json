@@ -1,0 +1,12 @@
+{
+  "autoload": {
+    "psr-4": {
+      "PROJECT\\": "src",
+      "PROJECT\\HTTP\\": "src/HTTP",
+      "App\\": "App"
+    }
+  },
+  "require": {
+    "vlucas/phpdotenv": "^5.6"
+  }
+}

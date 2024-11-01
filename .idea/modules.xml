@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/MCVStructure.iml" filepath="$PROJECT_DIR$/.idea/MCVStructure.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/MVCStructure.iml" filepath="$PROJECT_DIR$/.idea/MVCStructure.iml" />
     </modules>
   </component>
 </project>
