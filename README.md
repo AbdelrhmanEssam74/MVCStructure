@@ -4,7 +4,7 @@ Here's the `README.md` with code blocks and comments integrated into the structu
 
 # MVCStructure
 
-## Project Overview
+## Project Overview (not finished yet)
 
 **MVCStructure** is organized using the MVC (Model-View-Controller) design pattern, promoting separation of concerns by dividing application functionality into **Models**, **Views**, and **Controllers**. This layout enhances the project's maintainability, scalability, and readability. The project structure also includes routing, configuration, validation, and asset management for building a full-featured web application.
 
@@ -71,7 +71,7 @@ To set up **MVCStructure** on your local environment, follow these steps:
    Clone the repository to your local environment:
 
    ```bash
-   git clone https://github.com/your-repo/MVCStructure.git
+   git clone https://github.com/AbdelrhmanEssam74/MCVStructure.git
    cd MVCStructure
    ```
 
@@ -163,3 +163,6 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 ---
 
 Thank you for using **MVCStructure**!
+
+
+## The rest of the documentation will be written soon
