@@ -49,7 +49,8 @@ class LoginController
         }
         $user_data = app()->db->row("SELECT * FROM `users` WHERE email = ?", [request()->get('email')]);
         app()->session->set('login', true);
-        app()->session->set('userData', $user_data[0]);
+        app()->session->set('user_id', $user_data[0]->user_id);
+        app()->session->set('email', $user_data[0]->email);
         Login::login([
             'user_id' => $user_data[0]->user_id,
             'full_name' => $user_data[0]->full_name,
@@ -57,8 +58,9 @@ class LoginController
             'email' => $user_data[0]->email,
             'password' => $user_data[0]->password,
         ]);
-        return RedirectToView('profile');
+        return RedirectToView('profile?id=' . $user_data[0]->user_id);
     }
+
     public function logout(): void
     {
         session_unset();
