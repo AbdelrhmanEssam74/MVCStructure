@@ -1,4 +1,4 @@
-Here's the `README.md` with code blocks and comments integrated into the structure as requested.
+Here's the `README.md` with code blocks and comments integrated into the structure as requested
 
 ---
 
