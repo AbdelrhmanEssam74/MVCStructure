@@ -4,10 +4,11 @@ namespace PROJECT\View;
 
 class View
 {
-    public static function makeView($view, array $params = []): void
+    public static function makeView($view, array $params = [], $viewData = []): void
     {
+
         $baseContent = self::getBaseContent();
-        $viewContent = self::getViewContent($view, false, $params);
+        $viewContent = self::getViewContent($view, false, $params , $viewData);
         echo str_replace("{{content}}", $viewContent, $baseContent);
     }
 
@@ -23,7 +24,7 @@ class View
         self::getViewContent($error, true);
     }
 
-    private static function getViewContent($view, $isError = false, array $params = [])
+    private static function getViewContent($view, $isError = false, array $params = [], $viewData = [])
     {
 
         $path = $isError ? view_path() . 'errors/' : view_path();
@@ -45,6 +46,7 @@ class View
         if ($isError):
             include $view;
         else:
+            extract($viewData);
             ob_start();
             include $view;
             return ob_get_clean();

@@ -118,11 +118,17 @@ if (!function_exists("config")) {
         }
         return app()->config->get($key, $default);
     }
-
-    if (!function_exists("RedirectTo")) {
-        function RedirectToView($path): void
-        {
-            header("Location:" . env('HOST') . $path);
-        }
+}
+if (!function_exists("RedirectTo")) {
+    function RedirectToView($path): void
+    {
+        header("Location:" . env('HOST') . $path);
     }
+}
+
+if(!function_exists('getCurrentDate')){
+    function getCurrentDate( string $selector): string
+    {
+        return date($selector);
+    };
 }
