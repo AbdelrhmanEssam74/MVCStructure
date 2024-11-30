@@ -32,26 +32,39 @@ class Route
     {
         $path = $this->request->path();
         $method = $this->request->method();
+
+        // Get parameters from the request
         $params = $this->request->params();
-
-        // Check if the method exists in the RoutesMap array
-        if (array_key_exists($method, self::$RoutesMap) && array_key_exists($path, self::$RoutesMap[$method])) {
-            $action = self::$RoutesMap[$method][$path];
-
-            // If the action is a callback
-            if (is_callable($action)) {
-                call_user_func_array($action, $params);
-            }
-
-            // If the action is an array
+        // Trim the path to get the base route
+        $path_arr = explode('/', $path);
+        $trimmed_path = implode('/', array_slice($path_arr, 0, 3));
+        $extra_segments = array_slice($path_arr, 3); // Additional segments (e.g., param1, param2,...)
+        // Check if the method and trimmed path match a route in the RoutesMap
+        if (array_key_exists($method, self::$RoutesMap) && array_key_exists($trimmed_path, self::$RoutesMap[$method])) {
+            $action = self::$RoutesMap[$method][$trimmed_path]; // action = array() => [Controller , Method ]
+            // If the action is an array, ensure parameters match method signature
             if (is_array($action)) {
-                call_user_func_array([new $action[0], $action[1]], $params);
+                $controller = new $action[0];
+                $method_name = $action[1];
+
+                // Use Reflection to match parameters dynamically
+                $reflection = new \ReflectionMethod($controller, $method_name);
+                $method_params = $reflection->getParameters();
+                $mapped_params = [];
+
+                // Map extra segments to method parameters
+                foreach ($method_params as $index => $param) {
+                    $param_name = $param->getName();
+                    $mapped_params[$param_name] = $params[$param_name] ?? ($extra_segments[$index] ?? null);
+                }
+
+                call_user_func_array([$controller, $method_name], $mapped_params);
             }
         } else {
-            // Handle a 404 error when the route or method is not found
             View::makeErrorView('404');
             $this->response->setStatusCode(404);
         }
     }
+
 
 }
