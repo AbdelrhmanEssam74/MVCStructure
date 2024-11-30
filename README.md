@@ -101,7 +101,7 @@ To set up **MVCStructure** on your local environment, follow these steps:
    php -S localhost:800
    ```
 
-   The application should now be accessible at `http://localhost:8000`.
+   The application should now be accessible at `http://localhost:800`.
 
 ---
 
