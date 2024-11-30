@@ -21,10 +21,10 @@
             </ul>
             <div class="ms-lg-auto">
                 <?php if(!app()->session->exists('login')):?>
-                <a class="btn btn-outline-primary me-2 " href="login">Login</a>
-                <a class="btn btn-primary" href="signup">Sign Up</a>
+                <a class="btn btn-outline-primary me-2 " href="/login">Login</a>
+                <a class="btn btn-primary" href="/signup">Sign Up</a>
                 <?php else:?>
-                <a class="btn btn-danger" href="logout">Logout</a>
+                <a class="btn btn-danger" href="/logout">Logout</a>
                 <?php endif;?>
             </div>
         </div>
