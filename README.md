@@ -71,7 +71,7 @@ To set up **MVCStructure** on your local environment, follow these steps:
    Clone the repository to your local environment:
 
    ```bash
-   git clone https://github.com/AbdelrhmanEssam74/MCVStructure.git
+   git clone https://github.com/AbdelrhmanEssam74/MVCStructure.git
    cd MVCStructure
    ```
 
