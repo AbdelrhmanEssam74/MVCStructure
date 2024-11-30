@@ -1,4 +1,4 @@
-Here's the `README.md` with code blocks and comments integrated into the structure as requested.
+Here's the `README.md` with code blocks and comments integrated into the structure as requested
 
 ---
 
@@ -91,13 +91,6 @@ To set up **MVCStructure** on your local environment, follow these steps:
    npm install
    ```
 
-4. **Configure the Application**
-
-   Copy the `.env.example` file to `.env` and update environment variables as needed for database connection and other settings:
-
-   ```bash
-   cp .env.example .env
-   ```
 
 5. **Run the Application**
 
@@ -105,7 +98,7 @@ To set up **MVCStructure** on your local environment, follow these steps:
 
    ```bash
    cd Public
-   php -S localhost:8000
+   php -S localhost:800
    ```
 
    The application should now be accessible at `http://localhost:8000`.
