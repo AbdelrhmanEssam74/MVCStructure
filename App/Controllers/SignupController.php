@@ -2,10 +2,8 @@
 
 namespace App\Controllers;
 
-use App\Models\User;
-use PROJECT\Validation\Validation;
+use App\Models\Signup;
 use PROJECT\View\View;
-use PROJECT\HTTP\Request;
 
 class SignupController
 {
@@ -16,6 +14,6 @@ class SignupController
 
     public function store()
     {
-        User::signup();
+        Signup::signup();
     }
 }

@@ -18,7 +18,8 @@ class PasswordVerification implements Rules
 
     public function apply($field, $value, $data)
     {
-        return (password_verify($value, app()->db->row("SELECT `password` FROM `users` WHERE email = ?", [request()->get('email')])[0]->password));
+        $query_result = (object)app()->db->row("SELECT password FROM `users` WHERE email = ?", [request()->get('email')])[0];
+        return (password_verify($value, $query_result->password));
     }
 
     public function __toString()
