@@ -3,7 +3,6 @@
 namespace PROJECT\Database\Managers;
 
 use App\Models\Model;
-use PROJECT\Database\Grammars\MYSQLGrammar;
 use PROJECT\Database\Grammars\SQLITEGrammar;
 use PROJECT\Database\Managers\Contracts\DatabaseManager;
 
@@ -23,8 +22,18 @@ class SQLITEManager implements DatabaseManager
         }
         return self::$instance;
     }
-
-
+        /**
+     * Executes a SQL query with optional parameter binding.
+     *
+     * This function prepares and executes a SQL query, optionally binding values
+     * to placeholders in the query. It then fetches and returns all results.
+     *
+     * @param string $query The SQL query to execute.
+     * @param array $values An optional array of values to bind to the query placeholders.
+     *
+     * @return array An array of associative arrays representing the query results.
+     *               Each inner array represents a row with column names as keys.
+     */
     public function query(string $query, $values = [])
     {
         $stm = self::$instance->prepare($query);
@@ -35,7 +44,17 @@ class SQLITEManager implements DatabaseManager
         $stm->execute();
         return $stm->fetchAll(\PDO::FETCH_ASSOC);
     }
-
+    /**
+     * Creates a new record in the database.
+     *
+     * This function builds an INSERT query using the provided data,
+     * prepares the statement, binds the values, and executes the query.
+     *
+     * @param array $data An associative array containing the column names as keys
+     *                    and the values to be inserted.
+     *
+     * @return bool Returns TRUE on success or FALSE on failure.
+     */
     public function create($data)
     {
         $query = SQLITEGrammar::buildInsertQuery(array_keys($data));

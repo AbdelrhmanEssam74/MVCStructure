@@ -13,11 +13,6 @@ abstract class Model
         self::$instance = static::class;
         return app()->db->create($data);
     }
-    public static function login($data)
-    {
-        self::$instance = static::class;
-        return app()->db->create($data);
-    }
     public static function update($id, array $attributes)
     {
         self::$instance = static::class;
