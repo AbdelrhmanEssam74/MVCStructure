@@ -31,11 +31,13 @@ Below is the directory structure of **MVCStructure**:
 │   ├── controller/            # Contains controller files for handling application logic
 │   └── models/                # Contains model files for interacting with the database
 ├── Config/                    # Contains configuration files for the application
+├── database/                  # Contains database files like (sqlite, etc)
 ├── Public/                    # Publicly accessible files
 │   ├── index.php              # The entry point for the application
 │   └── assets/                # Directory for static assets
 │       ├── css/               # Stores cascading style sheets
 │       ├── js/                # Stores JavaScript files
+│       ├── fonts/             # stores fonts files
 │       └── images/            # Stores image assets
 ├── routes/                    # Contains route definitions for the application
 ├── src/                       # Source code directory
