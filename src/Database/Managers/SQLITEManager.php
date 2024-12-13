@@ -15,7 +15,7 @@ class SQLITEManager implements DatabaseManager
     {
         try {
             if (!self::$instance) {
-                self::$instance = new \PDO("sqlite:database.db");
+                self::$instance = new \PDO("sqlite:../database/SQLITE/database.db");
             }
 
         } catch (\PDOException $e) {
