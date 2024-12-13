@@ -5,6 +5,7 @@ namespace PROJECT;
 use mysql_xdevapi\Session;
 use PROJECT\Database\DB;
 use PROJECT\Database\Managers\MYSQLManager;
+use PROJECT\Database\Managers\SQLITEManager;
 use PROJECT\HTTP\Request;
 use PROJECT\HTTP\Response;
 use PROJECT\HTTP\Route;
@@ -30,9 +31,10 @@ class Application
         $this->db = new DB($this->getDBDriver());
     }
 
-    protected function getDBDriver(): MYSQLManager
+    protected function getDBDriver(): SQLITEManager|MYSQLManager
     {
         return match (env("DB_DRIVER")) {
+            'sqlite' => new SQLITEManager(),
             'mysql' => new MYSQLManager(),
             default => new MYSQLManager
     };
