@@ -14,6 +14,8 @@ if (app()->session->exists('login')) {
   <h2 class="text-center mb-4">Welcome Back</h2>
 
   <form method="post" novalidate>
+    <!-- CSRF Token -->
+    <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrf_token); ?>">
     <!-- Email Field -->
     <div class="form-group mb-3">
       <label for="email" class="form-label">Email Address</label>
