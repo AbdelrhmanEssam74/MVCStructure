@@ -18,7 +18,6 @@
 
 <body class="bg-light">
   <?php include view_path() . 'partials/navbar.php' ?>
-  <?php include view_path() . 'partials/Back_to_top_button.php' ?>
   <div>
     {{content}}
   </div>
