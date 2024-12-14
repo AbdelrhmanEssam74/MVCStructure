@@ -15,7 +15,6 @@ class Signup extends Model
 
     public static function signup()
     {
-        // TODO: fix mysql error when user try to create a new account
         $validator = new Validation();
         $validator->rules([
             'full_name' => 'required|alphaNum|between:6,30',
