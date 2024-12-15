@@ -41,8 +41,7 @@ class Signup extends Model
         'password' => bcrypt(request('password')),
       ]);
       self::sendAuthenticationCode(request('email'));
-      app()->session->setFlash('success', 'Registered successfully Now You Can Login With Your Email Address');
-      return RedirectToView('login');
+      return RedirectToView('verify');
     else:
       // Invalid token
       $response = new Response();

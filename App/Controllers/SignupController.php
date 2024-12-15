@@ -22,4 +22,20 @@ class SignupController
   {
     Signup::signup();
   }
+  public function verification()
+  {
+    View::makeView("auth.verification");
+  }
+  public function checkAuthCode()
+  {
+    $authCode = app()->session->get('auth_code');
+    $authCodeInput = request('auth_code');
+    if ($authCode !== $authCodeInput):
+      app()->session->setFlash('invalidCode', 'Oops! That code didn\'t work. Please double-check and try again.');
+      return RedirectToView('verification');
+    else:
+      app()->session->setFlash('success', 'Registered successfully Now You Can Login With Your Email Address');
+      return RedirectToView('login');
+    endif;
+  }
 }

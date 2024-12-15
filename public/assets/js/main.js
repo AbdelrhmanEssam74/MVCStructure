@@ -1,25 +1,30 @@
-//Get the button
-let mybutton = document.getElementById("btn-back-to-top");
-
-// When the user scrolls down 20px from the top of the document, show the button
-window.onscroll = function () {
-    scrollFunction();
-};
-
-function scrollFunction() {
-    if (
-        document.body.scrollTop > 20 ||
-        document.documentElement.scrollTop > 20
-    ) {
-        mybutton.style.display = "block";
-    } else {
-        mybutton.style.display = "none";
+// Autofocus and move to next input
+document.querySelectorAll(".digit-input").forEach((input, index, inputs) => {
+  input.addEventListener("input", (e) => {
+    if (e.target.value.length === 1 && index < inputs.length - 1) {
+      inputs[index + 1].focus();
     }
-}
-// When the user clicks on the button, scroll to the top of the document
-mybutton.addEventListener("click", backToTop);
+    if (e.target.value.length === 1 && index === inputs.length - 1) {
+      e.target.blur(); // Blur last input
+    }
+  });
 
-function backToTop() {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Backspace" && !e.target.value && index > 0) {
+      inputs[index - 1].focus();
+    }
+  });
+});
+
+// Combine the digits and submit
+function handleSubmit() {
+  const digits = Array.from(document.querySelectorAll(".digit-input"))
+    .map((input) => input.value)
+    .join("");
+  if (digits.length !== 6) {
+    alert("Please complete the 6-digit code.");
+    return false;
+  }
+  document.getElementById("auth-code").value = digits; // Set hidden input value
+  return true; // Allow form submission
 }
