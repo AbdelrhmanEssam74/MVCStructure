@@ -51,13 +51,6 @@ class Login extends Model
       app()->session->set('login', true);
       app()->session->set('user_id', $user_data->user_id);
       app()->session->set('email', $user_data->email);
-      Login::create([
-        'user_id' => $user_data->user_id,
-        'full_name' => $user_data->full_name,
-        'username' => $user_data->username,
-        'email' => $user_data->email,
-        'password' => $user_data->password,
-      ]);
       return RedirectToView('user/profile/' . $user_data->user_id);
     } else {
       // Invalid token
