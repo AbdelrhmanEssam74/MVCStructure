@@ -14,4 +14,5 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::get('/logout', [LoginController::class, 'logout']);
 Route::get('/user/profile', [UserController::class, 'profile']);
 Route::get('/verify', [SignupController::class, 'verification']);
-Route::post('/verify', [SignupController::class, 'checkAuthCode']);
+Route::post('/check-auth-code', [SignupController::class, 'checkAuthCode']);
+Route::post('/resend-auth-code', [SignupController::class, 'resendAuthCode']);

@@ -61,17 +61,19 @@ class SignupController
   }
   public function verification()
   {
+    if (!empty(request('email'))) {
+      app()->session->set('email', request('email'));
+    }
     View::makeView("auth.verification");
   }
   public static function sendAuthenticationCode($email)
   {
     // Send authentication code to user's email
     $send_mail = new EmailHelper();
-    $verification_code = GenerateAuthCode(); // Function to generate a random code
-    app()->session->set('auth_code', $verification_code);
+    $authentication_code = GenerateAuthCode(); // Function to generate a random code
+    app()->session->set('auth_code', $authentication_code);
     // Define the email subject and body
     $subject = "Your Authorization Code for Secure Access";
-
     $body = "
 <!DOCTYPE html>
 <html>
@@ -130,7 +132,7 @@ class SignupController
     <div class=\"content\">
       <p>Dear User,</p>
       <p>You requested to sign in or perform a secure action. Use the authorization code below to complete the process:</p>
-      <div class=\"code\">$verification_code</div>
+      <div class=\"code\">$authentication_code</div>
       <p>If you did not request this code, please ignore this email or contact support immediately.</p>
       <p>Thank you for using our service!</p>
     </div>
@@ -141,54 +143,61 @@ class SignupController
 </body>
 </html>";
     // Send the email
-    echo  $send_mail->sendEmail($email, $subject, $body);
+    $result =  $send_mail->sendEmail($email, $subject, $body);
+    ($result) ?  User::update('email', $email, ['auth_code_created_at' => date('Y:m:d h:s:i'), 'authentication_code' => $authentication_code]) : false;
+    return  $result;
   }
   public function checkAuthCode()
   {
-    // Get User Id from session if exists
-    $user_id = app()->session->get('user_id');
-    $email = request('email'); // Ensure email is passed in the request
-    $authCodeInput = request('auth_code');
+    $user_id =
+      (!empty(app()->session->get('user_id')))
+      ? app()->session->get('user_id')
+      : null;
+    $auth_code_input = request('auth_code');
+    // check if the id exists
     if ($user_id):
-      // Query database for authentication code and its creation time
       $authCodeData = app()->db->row(
         "SELECT  authentication_code, auth_code_created_at 
           FROM users 
           WHERE user_id = ?",
         [$user_id]
       )[0] ?? null;
-    elseif (request('email')):
-      // Query database for authentication code and its creation time
-      $authCodeData = app()->db->row(
-        "SELECT  authentication_code, auth_code_created_at 
-          FROM users 
-          WHERE email = ?",
-        [$email]
-      )[0] ?? null;
+      // check if the input code === the code which stored in db
+      if ($authCodeData && $authCodeData->authentication_code == $auth_code_input):
+        // if the code is correct, Check if the code is expired (15-minute TTL)
+        $codeAge = time() - strtotime($authCodeData->auth_code_created_at);
+        echo $codeAge;
+        if ($codeAge > 900) { // 900 seconds = 15 minutes
+          app()->session->setFlash('expiredCode', 'Your authentication code has expired. Please request a new one.');
+          return RedirectToView('verify');
+        }
+      endif;
     endif;
-
-    echo "<pre>";
-    print_r($authCodeData);
-    echo "</pre>";
-    // // Fetch the email and auth code input from the request
-    if (!$authCodeData) {
-      // Code not found or doesn't match
-      app()->session->setFlash('invalidCode', 'Oops! That code didn\'t work. Please double-check and try again.');
-      return RedirectToView('verify');
-    }
-
-    // // Check if the code is expired (15-minute TTL)
-    $codeAge = time() - strtotime($authCodeData->auth_code_created_at);
-    if ($codeAge > 900) { // 900 seconds = 15 minutes
-      app()->session->setFlash('expiredCode', 'Your authentication code has expired. Please request a new one.');
-      return RedirectToView('verify');
-    }
-
-    // Code is valid - Activate the user's account
+    // if the code is not expired, proceed with the Activation process
     User::update('user_id', $user_id, ['active' => 1, 'authentication_code' => null]); // Clear the code after use
 
     // Provide success feedback
     app()->session->setFlash('success', 'Registered successfully! You can now log in.');
     return RedirectToView('login');
+  }
+  public function resendAuthCode()
+  {
+    // Get Email Address from request
+    $email = request('email');
+    // Check if email exists in database
+    $user = app()->db->row("SELECT * FROM users WHERE email = ?", [$email]);
+    app()->session->set('user_id', $user[0]->user_id);
+    if (!$user) {
+      // Email not found
+      app()->session->setFlash('invalidEmail', 'Oops! That email doesn\'t exist.');
+      return RedirectToView('verify');
+    } else {
+      // Send a new authentication code
+      var_dump($user);
+      if (self::sendAuthenticationCode($email)) {
+        app()->session->setFlash('validEmail', 'Authentication code was sent successfully  Check your mail box ');
+        return RedirectToView('verify');
+      }
+    }
   }
 }

@@ -21,6 +21,6 @@ class EmailActiveRule implements Rules
 
   public function __toString()
   {
-    return "You Must Activate Your Account!  <strong><a href=\\verify>Active</a></strong>";
+    return "You Must Activate Your Account!  <strong><a data-bs-toggle='modal' data-bs-target='#exampleModal' data-whatever='@mdo'  href='#'>Active</a></strong>";
   }
 }

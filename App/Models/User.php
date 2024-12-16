@@ -12,9 +12,11 @@ class User extends Model
   private $password;
   private $active;
   private $created_at;
-  public static function getUserData($id = null)
+  private $authentication_code;
+  private $auth_code_created_at;
+  public static function getUserData($column, $value = null)
   { // Fetch user data
-    $userData = User::where(['user_id', '=', $id], '*');
+    $userData = User::where([$column, '=', $value], '*');
     $data = array(
       'user_id' => $userData[0]->user_id,
       'full_name' => $userData[0]->full_name,

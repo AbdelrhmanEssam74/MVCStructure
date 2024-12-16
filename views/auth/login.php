@@ -53,3 +53,38 @@ if (app()->session->exists('login')) {
     <button type="submit" class="btn btn-primary w-100">Login</button>
   </form>
 </div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelOne" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabelOne">Enter Your Email Address</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="post" action="/resend-auth-code">
+          <div class="form-group mb-3">
+            <label for="email" class="form-label">Email Address</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              name="email"
+              placeholder="Enter your email"
+              value="<?= app()->session->hasFlash('oldEmail') ? app()->session->getFlash('oldEmail') : ''; ?>">
+            <?php if (app()->session->hasFlash('email')): ?>
+              <div class="invalid-feedback">
+                <?= app()->session->getFlash('email')[0]; ?>
+              </div>
+            <?php endif; ?>
+          </div>
+          <div class="modal-footer">
+            <button type="submit"  class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

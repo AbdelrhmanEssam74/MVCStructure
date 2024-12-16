@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\User;
 use PROJECT\Validation\Validation;
 use PROJECT\HTTP\Response;
 use PROJECT\support\Hash;
@@ -36,9 +37,6 @@ class LoginController
         'password' => 'required|password_verification:users,password'
       ]);
       $validator->make(request()->all());
-      echo "<pre>";
-      print_r($validator->errors());
-      echo "</pre>";
       if (!$validator->passes()) {
         if ($validator->errors('email')) {
           app()->session->setFlash('email', $validator->errors('email'));
@@ -50,7 +48,11 @@ class LoginController
         }
         return backRedirect();
       }
-      
+      $userData = User::getUserData('email', request('email'));
+      app()->session->set('email', $userData['email']);
+      app()->session->set('login', true);
+      app()->session->set('user_id', $userData['user_id']);
+      return RedirectToView("user/profile/" . $userData['user_id']);
     } else {
       // Invalid token
       $response = new Response();
