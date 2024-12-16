@@ -10,6 +10,8 @@ class User extends Model
   private $username;
   private $email;
   private $password;
+  private $active;
+  private $created_at;
   public static function getUserData($id = null)
   { // Fetch user data
     $userData = User::where(['user_id', '=', $id], '*');

@@ -2,7 +2,8 @@
 
 namespace App\Controllers;
 
-use App\Models\Login;
+use PROJECT\Validation\Validation;
+use PROJECT\HTTP\Response;
 use PROJECT\support\Hash;
 use PROJECT\View\View;
 
@@ -17,14 +18,52 @@ class LoginController
     app()->session->set('csrf_token', $security['csrf_token']);
     View::makeView('auth.login', $security);
   }
-  public function login(): void
+  /**
+   * Handles the login process.
+   *
+   * This function validates the user's email and password, and if valid, redirects the user to the dashboard.
+   * If the validation fails, it sets flash messages for errors and old input, and redirects back to the login page.
+   *
+   * @return void
+   */
+  public  function login()
   {
-    Login::login();
+    if (hash_equals($_SESSION['csrf_token'], request('csrf_token'))) {
+      // Token is valid
+      $validator = new Validation();
+      $validator->rules([
+        'email' => 'required|email|email_exists:users,email|email_active:users,active',
+        'password' => 'required|password_verification:users,password'
+      ]);
+      $validator->make(request()->all());
+      echo "<pre>";
+      print_r($validator->errors());
+      echo "</pre>";
+      if (!$validator->passes()) {
+        if ($validator->errors('email')) {
+          app()->session->setFlash('email', $validator->errors('email'));
+        }
+        if ($validator->errors('password')) {
+          app()->session->setFlash('password', $validator->errors('password'));
+          if (!$validator->errors('email'))
+            app()->session->setFlash('oldEmail', request()->get('email'));
+        }
+        return backRedirect();
+      }
+      
+    } else {
+      // Invalid token
+      $response = new Response();
+      $response->setStatusCode(403);
+      View::makeErrorView('403');
+    }
   }
 
-
-  public function logout(): void
+  public static function logout()
   {
-    Login::logout();
+    session_unset();
+    session_destroy();
+    RedirectToView('login');
+    exit();
   }
 }
