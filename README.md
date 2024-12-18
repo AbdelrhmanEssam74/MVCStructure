@@ -167,7 +167,9 @@ The `src/` directory houses the core framework functionality and reusable compon
   ```
 - **📁 View**: Provides support for view rendering and template management.
 - **📁 Validation**: Contains validation logic and rules for form and input validation.
+
   - _validation.php_
+
   ```php
   // use validation in your controller
   // create a validator instance
@@ -181,11 +183,40 @@ The `src/` directory houses the core framework functionality and reusable compon
   'email' => 'required|email|email_exists:users,email'
   ]);
   ```
-  - *📁 Rules*
-  
+
+  - _📁 Rules_
+
     ```php
+    //How to create a new rule?
+    /*
+    1 - create a new class with the rule name and implements the rules interface
+    2- implements the two main methods for creating a new rule
+    */
+    public function apply($field, $value, $data): false|int
+    {
+        return //Your Logic Here;
+    }
+
+    public function __toString()
+    {
+        return "%s Your Message in Error";
+    }
+    // $s will be replaced with the filed name
 
     ```
+
+    - _RulesMap.php_
+
+      ```php
+      // This is a map of all the rules
+      protected static array $map = [
+        'RuleName' => RuleClass::class,
+      ]
+      // Example
+      protected static array $map = [
+        'required' => RequiredRule::class,
+      ]
+      ```
 
 - **📁 Database**: Handles database connections, grammars, and query management.
 - **📁 Support**: Additional helper classes or utilities that support the application.
