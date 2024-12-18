@@ -124,7 +124,7 @@ abstract class Model
 // Example of a User Model
 namespace App\Models;
 
-class User {
+class User extends Model {
     // Create your methods
     public function getAll() {
         // Fetch all users from the database
