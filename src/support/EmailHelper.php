@@ -9,7 +9,7 @@ use PHPMailer\PHPMailer\SMTP;
 class EmailHelper
 {
   private $mailer;
-  private $sender = "abdelrhmanroshdy8@gmail.com";
+  private $sender = "Sender";
 
   public function __construct()
   {
@@ -21,12 +21,12 @@ class EmailHelper
     $this->mailer->Host       = 'smtp.gmail.com';
     $this->mailer->SMTPAuth   = true;
     $this->mailer->Username   = $this->sender;
-    $this->mailer->Password   = 'fqcdeummjgssevgc';
+    $this->mailer->Password   = 'password';
     $this->mailer->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $this->mailer->Port       = 587;
 
     // Default sender
-    $this->mailer->setFrom($this->sender, 'Abdelrhman');
+    $this->mailer->setFrom($this->sender, '');
   }
 
   public function sendEmail($to, $subject, $body)

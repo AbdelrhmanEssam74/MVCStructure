@@ -236,8 +236,65 @@ The `src/` directory houses the core framework functionality and reusable compon
       ```
 
 - **📁 Database**: Handles database connections, grammars, and query management.
+  - *📁 Grammars.php*: Handles grammars and query management for database based on database driver
+    ```plaintext
+    ├── MySQLGrammar.php
+    ├── SQLiteGrammar.php
+    ```
+  - *📁 Managers.php*:  
+    - *📁 Contracts* :
+        ```plaintext
+            ├── DatabaseManager.php  $interface of DatabaseManager 
+        ```
+    
+    ```plaintext
+    ├── MySQLManager.php
+    ├── SQLiteManager.php
+    ```
 
 - **📁 Support**: Additional helper classes or utilities that support the application.
+  - ***Arr.php***:
+    The `Arr.php` file contains the Arr class,
+    a utility for performing advanced operations on arrays and array-like objects.
+
+    - **Key Features**:
+      - **Subset Operations**:
+        - `only`: Extracts specific keys and their values from an array.
+        - `except`: Removes specific keys and their values from an array.
+      - **Key Management**:
+        - `set`: Sets a value in an array using dot notation for nested keys.
+        - `add`: Adds a value to the array if the key does not already exist.
+        - `forget`: Removes keys from an array using dot notation.
+      - **Key Existence**:
+         - `accessible`: Checks if a value is array-like (ArrayAccess or plain array).
+         - `exists`: Checks if a key exists in an array or ArrayAccess object.
+         - `has`: Verifies the presence of nested keys in an array.
+        
+      - **Value Retrieval**:
+        - `get`: Retrieves a value from an array using dot notation for nested keys.
+        - `first`: Gets the first element of an array, optionally filtered by a callback.
+        - `last`: Gets the last element of an array, optionally filtered by a callback.
+        Array Manipulation:
+  - ***EmailHelper.php:***
+    The `EmailHelper.php` file provides a class designed to facilitate email sending using the PHPMailer library. It simplifies the process of configuring SMTP and sending emails with customizable options.
+    - *Key Features:*
+      - *SMTP Configuration:*
+        - Configures the mailer to use Gmail's SMTP server (`smtp.gmail.com`) with secure communication (`ENCRYPTION_STARTTLS`).
+        - Utilizes SMTP authentication with a default sender email (`Your Gmail Sender`).
+        - Sets the default port for sending emails (`587`).
+      - *Default Settings:*
+        - Predefines the sender email address and name (`Sender Name`).
+         - Configures the mailer to send HTML emails by default.
+      - *Email Sending:*
+        - `sendEmail($to, $subject, $body)`:
+          - Sends an email to the specified recipient.
+          - Accepts the recipient's email address, subject line, and message body as parameters.
+          - Automatically sets the character set to UTF-8 and enables HTML content.
+          - Provides error handling with detailed error messages if email sending fails.
+  - *Hash.php*
+  - *Helpers.php*
+  - *Sessions.php*
+  - *Str.php*
 
 ## Config Directory (config/)
 
