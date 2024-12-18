@@ -15,7 +15,6 @@ It includes routing, configuration, validation, and asset management to help you
 - [📜 Directory Overview](#-directory-overview)
 - [📥 Installation](#-installation)
 - [🤝 Contributing](#-contributing)
-- [📄 License](#-license)
 
 ---
 
@@ -597,10 +596,5 @@ Please ensure that your code follows best practices and includes documentation f
 
 ---
 
-## 📄 License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
----
 
 Thank you for using **MVCStructure**!
