@@ -1,16 +1,14 @@
-Here's the `README.md` with code blocks and comments integrated into the structure as requested
+# 🚀 MVCStructure
+
+## 📌 Project Overview
+
+**MVCStructure** is a clean and well-organized implementation of the **Model-View-Controller (MVC)** design pattern. This project promotes **separation of concerns** by dividing application functionality into **Models**, **Views**, and **Controllers**, making your codebase maintainable, scalable, and easy to navigate.
+
+It includes routing, configuration, validation, and asset management to help you build full-featured web applications efficiently.
 
 ---
 
-# MVCStructure
-
-## Project Overview (not finished yet)
-
-**MVCStructure** is organized using the MVC (Model-View-Controller) design pattern, promoting separation of concerns by dividing application functionality into **Models**, **Views**, and **Controllers**. This layout enhances the project's maintainability, scalability, and readability. The project structure also includes routing, configuration, validation, and asset management for building a full-featured web application.
-
----
-
-## Table of Contents
+## 📚 Table of Contents
 
 - [Project Overview](#project-overview)
 - [Directory Structure](#directory-structure)
@@ -21,45 +19,45 @@ Here's the `README.md` with code blocks and comments integrated into the structu
 
 ---
 
-## Directory Structure
+## 📁 Directory Structure
 
-Below is the directory structure of **MVCStructure**:
+Below is the complete directory structure for **MVCStructure**:
 
 ```plaintext
 .
-├── App/                       # Main application directory
-│   ├── controller/            # Contains controller files for handling application logic
-│   └── models/                # Contains model files for interacting with the database
-├── Config/                    # Contains configuration files for the application
-├── database/                  # Contains database files like (sqlite, etc)
-├── Public/                    # Publicly accessible files
-│   ├── index.php              # The entry point for the application
-│   └── assets/                # Directory for static assets
-│       ├── css/               # Stores cascading style sheets
-│       ├── js/                # Stores JavaScript files
-│       ├── fonts/             # stores fonts files
-│       └── images/            # Stores image assets
-├── routes/                    # Contains route definitions for the application
-├── src/                       # Source code directory
-│   ├── HTTP/                  # Contains HTTP-related functionality
-│   ├── support/               # Support classes for the application
-│   ├── view/                  # Contains view-related classes
-│   ├── Validation/            # Contains validation logic
-│   │   ├── Rules/             # Contains validation rules
-│   │       ├── Contract/      # Defines contracts for validation rules
-│   ├── Database/              # Database-related classes and functionality
-│   │   ├── Concerns/          # Database concerns
-│   │   ├── Grammars/          # Database grammars
-│   │   ├── Managers/          # Database managers
-│   │       ├── Contract/      # Database contracts
-│   └── Application.php        # Main application logic
-├── views/                     # Contains view templates
-│   ├── auth/                  # Templates for authentication
-│   ├── errors/                # Contains error view templates
-│   ├── layout/                # Contains layout templates
-│   ├── partials/              # Contains partial templates for reuse
-│   └── index.php              # The main application file
-└── README.md                  # Documentation for the project
+├── 📁 App/                       # Main application directory
+│   ├── 📁 controller/            # Application logic (controllers)
+│   └── 📁 models/                # Data logic and database interactions
+├── 📁 Config/                    # Application configuration files
+├── 📁 database/                  # Database files (e.g., SQLite)
+├── 📁 Public/                    # Publicly accessible files
+│   ├── index.php                 # Application entry point
+│   └── 📁 assets/                # Static assets
+│       ├── 📁 css/               # Stylesheets
+│       ├── 📁 js/                # JavaScript files
+│       ├── 📁 fonts/             # Font files
+│       └── 📁 images/            # Images and assets
+├── 📁 routes/                    # Route definitions
+├── 📁 src/                       # Source code directory
+│   ├── 📁 HTTP/                  # HTTP-related classes
+│   ├── 📁 support/               # Support utility classes
+│   ├── 📁 view/                  # View-related classes
+│   ├── 📁 Validation/            # Validation logic
+│   │   ├── 📁 Rules/             # Custom validation rules
+│   │       ├── 📁 Contract/      # Validation contracts
+│   ├── 📁 Database/              # Database management classes
+│   │   ├── 📁 Concerns/          # Database concerns
+│   │   ├── 📁 Grammars/          # Database grammar logic
+│   │   ├── 📁 Managers/          # Database managers
+│   │       ├── 📁 Contract/      # Database contracts
+│   └── Application.php           # Main application logic
+├── 📁 views/                     # View templates
+│   ├── 📁 auth/                  # Authentication templates
+│   ├── 📁 errors/                # Error pages
+│   ├── 📁 layout/                # Layout templates
+│   ├── 📁 partials/              # Reusable partial templates
+│   └── index.php                 # Main view file
+└── README.md                     # Project documentation
 ```
 
 ---
@@ -93,8 +91,7 @@ To set up **MVCStructure** on your local environment, follow these steps:
    npm install
    ```
 
-
-5. **Run the Application**
+4. **Run the Application**
 
    Navigate to the `Public` directory and start the PHP server:
 
@@ -107,21 +104,152 @@ To set up **MVCStructure** on your local environment, follow these steps:
 
 ---
 
-## Usage
+## Directory Overview
 
 The **MVCStructure** project follows the MVC pattern to structure the application, with each major component serving a distinct purpose:
 
-- **Models (`App/models/`)**: Handles data logic and communication with the database.
-- **Controllers (`App/controller/`)**: Manages application logic, processes incoming requests, and determines which views to render.
-- **Views (`views/`)**: Renders user interface templates, organized with layout and partial templates for reusability.
-- **Routes (`routes/`)**: Defines application routes and maps them to specific controllers and actions.
+## Entry Point
 
-For instance, adding a new route might look like:
+- **Entry Point (`Public/index.php`)**:The main entry point of the application where all incoming requests are handled. It bootstraps the application and routes requests to the appropriate controllers.
+
+```bash
+$ cd Public
+$ php -S localhost:8000
+```
+
+## Models Directory (App/controller/)
+
+- **Models (`App/models/`)**: contains all the classes responsible for handling data logic and database communication. Models interact with the database, perform CRUD operations, and structure the data for the application
+
+```php
+// Example of a User Model
+namespace App\Models;
+
+class User {
+    public function getAll() {
+        // Fetch all users from the database
+    }
+}
+```
+
+## Controllers Directory (App/controller/)
+
+- **Controllers (`App/controller/`)**: Handles the application logic by processing incoming requests, retrieving data from models, and determining the appropriate views to render. Controllers act as intermediaries between models and views.
+
+```php
+// Example of a Controller
+namespace App\Controller;
+
+class HomeController {
+    public function index() {
+      return View::makeView("filename");
+      or
+      return View::makeView("folder.filenames");
+    }
+}
+
+```
+
+## Source Directory (src/)
+
+The `src/` directory houses the core framework functionality and reusable components:
+
+- **📁 HTTP**: Manages HTTP-related functionality (e.g., requests, responses).
+  - _Request.php_ :
+  ```php
+  // Example of urls
+  // you can add your own custom patterns
+  $routePatterns =
+  [
+    $segments[0] . '/' . $segments[1] . '/{Controller}/{method}/{param}',
+    $segments[0] . '/' . $segments[1] . '/{param1}/{param2}{...'
+  ];
+  ```
+- **📁 View**: Provides support for view rendering and template management.
+- **📁 Validation**: Contains validation logic and rules for form and input validation.
+  - _validation.php_
+  ```php
+  // use validation in your controller
+  // create a validator instance
+  $validator = new Validation();
+  // apply the rules to the validator
+  $validator->rules([
+  'filedName' => 'RuleName|rule:tableName,column',
+  ]);
+  // Example
+  $validator->rules([
+  'email' => 'required|email|email_exists:users,email'
+  ]);
+  ```
+  - *📁 Rules*
+  
+    ```php
+
+    ```
+
+- **📁 Database**: Handles database connections, grammars, and query management.
+- **📁 Support**: Additional helper classes or utilities that support the application.
+
+## Config Directory (config/)
+
+- **Config (`config/`)**: contains configuration files for managing environment settings, database connections, and other system parameters.
+
+```php
+return [
+  'default'   => env("DB_DRIVER", ''),
+  'localhost' => env("DB_HOST", ''),
+  'database'  => env("DB_DATABASE", ''),
+  'username'  => env('DB_USERNAME', 'root'),
+  'password'  => env('DB_PASSWORD', ''),
+];
+```
+
+## Database Directory (database/)
+
+- **Database (`database/`)**: Includes database-related files such as SQLite database files, migrations, or seeds required to structure and initialize the database.
+
+```plaintext
+database/
+├── SQLite
+      └── database.db
+
+```
+
+## Views Directory (views/)
+
+The `views/` Contains user interface templates that render the front end of the application. Views are organized as follows::
+
+- **📁 Layouts**: Contain Main file which contains {{content}} which replaced with the page template
+
+```html
+<!-- Example: Layout Template -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title><?= env('APP_NAME') ?></title>
+  </head>
+  <body>
+    <?php include 'partials/header.php'; ?>
+    {{content}}
+    <?php include 'partials/footer.php'; ?>
+  </body>
+</html>
+```
+
+- **📁 Partials**: Reusable components like navigation bars and sidebars.
+- **📁 Errors**: Templates for displaying error pages (e.g., 404, 500).
+- **📁 Authentication**: Templates for login, registration, and authentication flows.
+
+## Routes Directory (routes/)
+
+- **Routes (`routes/`)**: Defines all application routes and maps them to their respective controllers and actions. Routes handle incoming HTTP requests (e.g., GET, POST) and determine which controller logic to execute.
+  For instance, adding a new route might look like:
 
 ```php
 // routes/web.php
-
+// Example: Defining Routes
 Route::get('/', [HomeController::class, 'index']);
+Route::post('/submit', [FormController::class, 'submit']);
 ```
 
 This route definition would map a GET request to `/home` to the `index` method in the `HomeController`.
@@ -158,6 +286,5 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 ---
 
 Thank you for using **MVCStructure**!
-
 
 ## The rest of the documentation will be written soon

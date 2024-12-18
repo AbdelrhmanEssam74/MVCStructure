@@ -51,7 +51,7 @@ class Request
         $routePatterns = [];
         if (count($segments) > 1) {
             $routePatterns = [
-                $segments[0] . '/' . $segments[1] . '/{Controller}/{method}/{param}', // For patterns like /controller/method/{id}
+                $segments[0] . '/' . $segments[1] . '/{Controller}/{method}/{param}', // For patterns like /controller/method/{param}
                 $segments[0] . '/' . $segments[1] . '/{param1}/{param2}', // Optional pattern example
             ];
         }

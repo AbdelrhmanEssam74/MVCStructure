@@ -1,1 +1,0 @@
-<div class="alert alert-info text-center"> <strong>Hello <?= $full_name ?></strong></div>
