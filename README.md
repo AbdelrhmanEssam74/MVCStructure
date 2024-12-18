@@ -10,10 +10,10 @@ It includes routing, configuration, validation, and asset management to help you
 
 ## 📚 Table of Contents
 
-- [Project Overview](#project-overview)
+- [Project Overview](##project-overview)
 - [Directory Structure](#directory-structure)
 - [Installation](#installation)
-- [Usage](#usage)
+- [Directory Overview](#DirectoryOverview)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -59,48 +59,6 @@ Below is the complete directory structure for **MVCStructure**:
 │   └── index.php                 # Main view file
 └── README.md                     # Project documentation
 ```
-
----
-
-## Installation
-
-To set up **MVCStructure** on your local environment, follow these steps:
-
-1. **Clone the Repository**
-
-   Clone the repository to your local environment:
-
-   ```bash
-   git clone https://github.com/AbdelrhmanEssam74/MVCStructure.git
-   cd MVCStructure
-   ```
-
-2. **Install PHP Dependencies**
-
-   Ensure [Composer](https://getcomposer.org/) is installed, then run:
-
-   ```bash
-   composer install
-   ```
-
-3. **Install Node.js Dependencies**
-
-   Install Node.js dependencies for static assets (e.g., CSS, JavaScript):
-
-   ```bash
-   npm install
-   ```
-
-4. **Run the Application**
-
-   Navigate to the `Public` directory and start the PHP server:
-
-   ```bash
-   cd Public
-   php -S localhost:800
-   ```
-
-   The application should now be accessible at `http://localhost:800`.
 
 ---
 
@@ -284,6 +242,48 @@ Route::post('/submit', [FormController::class, 'submit']);
 ```
 
 This route definition would map a GET request to `/home` to the `index` method in the `HomeController`.
+
+---
+
+## Installation
+
+To set up **MVCStructure** on your local environment, follow these steps:
+
+1. **Clone the Repository**
+
+   Clone the repository to your local environment:
+
+   ```bash
+   git clone https://github.com/AbdelrhmanEssam74/MVCStructure.git
+   cd MVCStructure
+   ```
+
+2. **Install PHP Dependencies**
+
+   Ensure [Composer](https://getcomposer.org/) is installed, then run:
+
+   ```bash
+   composer install
+   ```
+
+3. **Install Node.js Dependencies**
+
+   Install Node.js dependencies for static assets (e.g., CSS, JavaScript):
+
+   ```bash
+   npm install
+   ```
+
+4. **Run the Application**
+
+   Navigate to the `Public` directory and start the PHP server:
+
+   ```bash
+   cd Public
+   php -S localhost:800
+   ```
+
+   The application should now be accessible at `http://localhost:800` Or use Your Host.
 
 ---
 
