@@ -2,8 +2,15 @@
 
 namespace PROJECT\support;
 
+/**
+ * Class str
+ * Provides methods for string manipulation, including converting between singular and plural forms.
+ */
 class str
 {
+    /**
+     * Regular expressions and replacements for pluralizing words.
+     */
     public static array $plural = [
         '/(quiz)$/i' => '$1zes',
         '/^(ox)$/i' => '$1en',
@@ -26,6 +33,9 @@ class str
         '/$/' => 's'
     ];
 
+    /**
+     * Regular expressions and replacements for singularizing words.
+     */
     public static array $singular = [
         '/(quiz)zes$/i' => '$1',
         '/(matr)ices$/i' => '$1ix',
@@ -57,6 +67,9 @@ class str
         '/s$/i' => ''
     ];
 
+    /**
+     * Irregular word mappings for pluralization and singularization.
+     */
     public static array $irregular = [
         'move' => 'moves',
         'foot' => 'feet',
@@ -69,6 +82,9 @@ class str
         'valve' => 'valves'
     ];
 
+    /**
+     * Words that are uncountable and do not change between singular and plural.
+     */
     public static array $uncountable = [
         'sheep',
         'fish',
@@ -81,11 +97,23 @@ class str
         'equipment'
     ];
 
+    /**
+     * Converts a string to lowercase.
+     *
+     * @param string $string The string to convert.
+     * @return string The lowercase version of the string.
+     */
     public static function lower($string): string
     {
         return strtolower($string);
     }
 
+    /**
+     * Converts a string to its plural form.
+     *
+     * @param string $string The string to pluralize.
+     * @return string The pluralized string.
+     */
     public static function plural($string)
     {
         if (in_array(self::lower($string), self::$uncountable)) {
@@ -106,6 +134,12 @@ class str
         return $string;
     }
 
+    /**
+     * Converts a string to its singular form.
+     *
+     * @param string $string The string to singularize.
+     * @return string The singularized string.
+     */
     public static function singular($string)
     {
         if (in_array(self::lower($string), self::$uncountable)) {

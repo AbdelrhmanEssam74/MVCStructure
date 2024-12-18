@@ -10,12 +10,12 @@ It includes routing, configuration, validation, and asset management to help you
 
 ## 📚 Table of Contents
 
-- [Project Overview](##project-overview)
-- [Directory Structure](#directory-structure)
-- [Directory Overview](#DirectoryOverview)
-- [Installation](#installation)
-- [Contributing](#contributing)
-- [License](#license)
+- [📌 Project Overview](#-project-overview)
+- [📂 Directory Structure](#-directory-structure)
+- [📜 Directory Overview](#-directory-overview)
+- [📥 Installation](#-installation)
+- [🤝 Contributing](#-contributing)
+- [📄 License](#-license)
 
 ---
 
@@ -62,7 +62,7 @@ Below is the complete directory structure for **MVCStructure**:
 
 ---
 
-## Directory Overview
+## 📜 Directory Overview
 
 The **MVCStructure** project follows the MVC pattern to structure the application, with each major component serving a distinct purpose:
 
@@ -252,58 +252,220 @@ The `src/` directory houses the core framework functionality and reusable compon
     ├── SQLiteManager.php
     ```
 
-- **📁 Support**: Additional helper classes or utilities that support the application.
-  - ***Arr.php***:
-    The `Arr.php` file contains the Arr class,
-    a utility for performing advanced operations on arrays and array-like objects.
+    - **📁 Support**: Additional helper classes or utilities that support the application.
+      - ***Arr.php***:
+        The `Arr.php` file contains the Arr class,
+        a utility for performing advanced operations on arrays and array-like objects.
 
-    - **Key Features**:
-      - **Subset Operations**:
-        - `only`: Extracts specific keys and their values from an array.
-        - `except`: Removes specific keys and their values from an array.
-      - **Key Management**:
-        - `set`: Sets a value in an array using dot notation for nested keys.
-        - `add`: Adds a value to the array if the key does not already exist.
-        - `forget`: Removes keys from an array using dot notation.
-      - **Key Existence**:
-         - `accessible`: Checks if a value is array-like (ArrayAccess or plain array).
-         - `exists`: Checks if a key exists in an array or ArrayAccess object.
-         - `has`: Verifies the presence of nested keys in an array.
+        - **Key Features**:
+          - **Subset Operations**:
+            - `only`: Extracts specific keys and their values from an array.
+            - `except`: Removes specific keys and their values from an array.
+          - **Key Management**:
+            - `set`: Sets a value in an array using dot notation for nested keys.
+            - `add`: Adds a value to the array if the key does not already exist.
+            - `forget`: Removes keys from an array using dot notation.
+          - **Key Existence**:
+             - `accessible`: Checks if a value is array-like (ArrayAccess or plain array).
+             - `exists`: Checks if a key exists in an array or ArrayAccess object.
+             - `has`: Verifies the presence of nested keys in an array.
         
-      - **Value Retrieval**:
-        - `get`: Retrieves a value from an array using dot notation for nested keys.
-        - `first`: Gets the first element of an array, optionally filtered by a callback.
-        - `last`: Gets the last element of an array, optionally filtered by a callback.
-        Array Manipulation:
-  - ***EmailHelper.php:***
-    The `EmailHelper.php` file provides a class designed to facilitate email sending using the PHPMailer library. It simplifies the process of configuring SMTP and sending emails with customizable options.
-    - *Key Features:*
-      - *SMTP Configuration:*
-        - Configures the mailer to use Gmail's SMTP server (`smtp.gmail.com`) with secure communication (`ENCRYPTION_STARTTLS`).
-        - Utilizes SMTP authentication with a default sender email (`Your Gmail Sender`).
-        - Sets the default port for sending emails (`587`).
-      - *Default Settings:*
-        - Predefines the sender email address and name (`Sender Name`).
-         - Configures the mailer to send HTML emails by default.
-      - *Email Sending:*
-        - `sendEmail($to, $subject, $body)`:
-          - Sends an email to the specified recipient.
-          - Accepts the recipient's email address, subject line, and message body as parameters.
-          - Automatically sets the character set to UTF-8 and enables HTML content.
-          - Provides error handling with detailed error messages if email sending fails.
-  - ***Hash.php***
-    The `Hash.php` file provides a utility class for handling password hashing, verification, and token generation. This class ensures secure password storage and easy validation for authentication systems.
-    - *Key Features*:
-      - Password Hashing:
-        - Utilizes the `PASSWORD_BCRYPT` algorithm for secure password hashing.
-      - Password Verification:
-        - Compares a `plain-text` password with its `hashed` counterpart to confirm validity.
-      - Token Generation:
-        - Generates a unique token using `SHA-1` encryption and a timestamp.
-  - *Helpers.php*
-  - *Sessions.php*
-  - *Str.php*
-
+          - **Value Retrieval**:
+            - `get`: Retrieves a value from an array using dot notation for nested keys.
+            - `first`: Gets the first element of an array, optionally filtered by a callback.
+            - `last`: Gets the last element of an array, optionally filtered by a callback.
+            Array Manipulation:
+      - ***EmailHelper.php:***
+        The `EmailHelper.php` file provides a class designed to facilitate email sending using the PHPMailer library. It simplifies the process of configuring SMTP and sending emails with customizable options.
+        - *Key Features:*
+          - *SMTP Configuration:*
+            - Configures the mailer to use Gmail's SMTP server (`smtp.gmail.com`) with secure communication (`ENCRYPTION_STARTTLS`).
+            - Utilizes SMTP authentication with a default sender email (`Your Gmail Sender`).
+            - Sets the default port for sending emails (`587`).
+          - *Default Settings:*
+            - Predefines the sender email address and name (`Sender Name`).
+             - Configures the mailer to send HTML emails by default.
+          - *Email Sending:*
+            - `sendEmail($to, $subject, $body)`:
+              - Sends an email to the specified recipient.
+              - Accepts the recipient's email address, subject line, and message body as parameters.
+              - Automatically sets the character set to UTF-8 and enables HTML content.
+              - Provides error handling with detailed error messages if email sending fails.
+      - ***Hash.php***
+        The `Hash.php` file provides a utility class for handling password hashing, verification, and token generation. This class ensures secure password storage and easy validation for authentication systems.
+        - *Key Features*:
+          - Password Hashing:
+            - Utilizes the `PASSWORD_BCRYPT` algorithm for secure password hashing.
+          - Password Verification:
+            - Compares a `plain-text` password with its `hashed` counterpart to confirm validity.
+          - Token Generation:
+            - Generates a unique token using `SHA-1` encryption and a timestamp.
+        - *Method*
+          - `hash($password)`: string
+            - Hashes the given password using the `PASSWORD_BCRYPT` algorithm
+            - ```php
+              $hashedPassword = Hash::hash('myPassword');  
+              ```
+          - `verify($password, $hashedPassword)`:
+            - Verifies that a plain-text password matches its hashed version.
+            ```php
+            $isValid = Hash::verify('myPassword', $hashedPassword);
+            ```
+          - `makeToken($value)`: string
+            - Creates a unique token by hashing the input value concatenated with the current timestamp using the `SHA-1` algorithm.
+            ```php
+            $token = Hash::makeToken('uniqueValue'); 
+            ```
+      - ***Helpers.php***
+        - The `Helpers.php` file contains a collection of utility functions designed to streamline common operations within the application. These functions enhance developer productivity by simplifying tasks like configuration management, request handling, environment variable access, and more.
+          - *Key Features*
+            - Environment Variables
+              - `env`: Retrieves the value of an environment variable with a fallback option.
+            - Dynamic Value Resolution 
+              - `value`: Evaluates a closure or returns the value directly.
+            - Path Utilities 
+              - `base_path`: Returns the base directory of the project. 
+              - `view_path`: Provides the path to the views' directory. 
+              - `config_path`: Provides the path to the configuration files directory.
+            - Session and Request Handling 
+              - `old`: Retrieves the previous value of a form field from session flash data. 
+              - `request`: Handles HTTP requests and retrieves input data. 
+              - `backRedirect`: Redirects the user to the previous page.
+            - Application Management 
+              - `app`: Returns the singleton instance of the Application class. 
+              - `config`: Retrieves or sets configuration values.
+            - Redirects 
+              - `RedirectToView`: Redirects the user to a specified path.
+            - String and Class Utilities 
+              - `class_basename`: Returns the base class name, stripping namespace information. 
+              - `bcrypt`: Hashes passwords using the application's hashing utility.
+            - Date and Time 
+              - `getCurrentDate`: Returns the current date and time formatted as specified.
+            - Authentication Code 
+              - `GenerateAuthCode`: Generates a random 6-digit authentication code.
+          - Detailed Method Descriptions 
+            - `env($key, $value = null)`
+              - Retrieves the value of an environment variable or a default value if not set. 
+            - `value($value)`
+              - Resolves a closure or returns the value directly. 
+            - `base_path()`
+              - Returns the base directory path of the project.
+            - `view_path()`
+              - Returns the path to the views' directory. 
+            - `old($key)`
+              - Retrieves the previous value of a form field from session flash data. 
+            - `request($key = null)`
+              - Retrieves specific input data from an HTTP request.
+            - `backRedirect()`
+              - Redirects the user to the previous page. 
+            - `app()`
+              - Provides the singleton instance of the application.
+            - `class_basename($class)`
+              - Strips namespaces to return the base name of a class.
+            - `bcrypt($password)`
+              - Hashes a plain-text password for secure storage.
+            - `config_path()`
+              - Returns the path to the configuration files directory.
+            - `config($key = null, $default = null)`
+              - Retrieves or sets application configuration values.
+            - `RedirectToView($path)`
+              - Redirects the user to a specific application path.
+            - `getCurrentDate($selector = "Y:m:d h:s:i")`
+              - Returns the current date and time formatted as per the selector.
+            - `GenerateAuthCode()`
+              - Generates a secure 6-digit random authentication code.
+      - ***Sessions.php***
+        - The `Sessions.php` file defines the `Sessions` class, which provides a robust framework for managing session data and flash messages in a PHP application. It simplifies session handling by offering methods to store, retrieve, and manage data, ensuring clean and efficient session operations.
+          - *Key Features*
+            - Flash Message Handling
+              - Flash messages persist for a single request and are automatically removed afterward.
+              - Methods include setting, retrieving, and checking flash messages.
+            - Session Data Management 
+              - Provides methods to set, retrieve, check, and remove session variables. 
+              - Ensures clean session handling by marking flash messages for removal after usage.
+            - Automatic Cleanup 
+              - Flash messages marked for removal are automatically cleared during the destructor process.
+            - Session Initialization 
+              - Automatically starts the session if it has not been started already.
+          - *Detailed Method Descriptions*
+            - `__construct()`
+              - Initializes the session and marks flash messages for removal after their first retrieval.
+            - Flash Message Methods
+              - `setFlash($key, $message)`: Stores a flash message with a specified key and value.
+              - `getFlash($key)`: Retrieves the value of a flash message by its key.
+              - `hasFlash($key)`: Checks if a flash message exists for the specified key.
+            - Session Variable Methods
+              - `set($key, $value)`: Sets a session variable with a key-value pair.
+              - `get($key)`: Retrieves the value of a session variable by its key.
+              - `exists($key)`: Checks if a session variable exists for the specified key.
+              - `remove($key)`: Deletes a session variable by its key.
+            - Flash Message Cleanup 
+              - `removeFlashMessages()`: Removes flash messages marked for deletion. 
+              - Invoked automatically by the destructor to maintain session cleanliness.
+            - `__destruct()`
+              - Automatically removes expired flash messages when the class is destroyed.
+      - ***Str.php***
+        - The `str.php` file defines the `str` class, which provides utility methods for string manipulation. The class focuses primarily on converting strings between singular and plural forms, as well as handling case transformations. It incorporates rules for regular pluralization and singularization, irregular word mappings, and uncountable words that do not change in form.
+        - Key Features
+          - Pluralization and Singularization 
+            - Converts words between singular and plural forms based on defined regular expressions and mappings. 
+            - Handles irregular words with predefined mappings. 
+            - Supports uncountable words that remain the same in both forms. 
+          - String Transformation 
+            - Converts a string to lowercase. 
+          - Customization and Extendability 
+            - Easily extendable arrays for custom pluralization and singularization rules. 
+            - Configurable list of uncountable words.
+        - **Class Details**
+          - Properties
+            - `$plural`
+              - An array of regular expressions and replacements for pluralizing words. 
+              - Examples:
+                - `quiz` → `quizzes` 
+                - `mouse` → `mice` 
+                - `child` → `children`
+            - `$singular`
+              - An array of regular expressions and replacements for singularizing words. 
+              - Examples:
+                - `quizzes` → `quiz`
+                - `mice` → `mouse`
+                - `children` → `child`
+            - `$irregular`
+              - A mapping of irregular singular and plural forms. 
+              - Examples:
+                - `person` → `people` 
+                - `man` → `men`
+            - `$uncountable`
+              - A list of words that do not change between singular and plural forms. 
+              - Examples:
+                - `sheep`, `series`, `information`
+          - ***Methods***
+            - `lower($string): string`
+              - Converts a string to lowercase. 
+              - **Example Usage:**
+                - ```php
+                  str::lower("HelloWorld"); // Output: "helloworld"
+                  ```
+            - `plural($string): string`
+              - Converts a string to its plural form using the following steps:
+                - Checks if the word is uncountable; returns as-is if true. 
+                - Matches against irregular word mappings. 
+                - Applies regular pluralization rules using defined patterns.
+                - **Example Usage:**
+                - ```php
+                  str::plural("child"); // Output: "children"
+                  str::plural("mouse"); // Output: "mice"
+                  ```
+            - `singular($string): string`
+              - Converts a string to its singular form using the following steps:
+                - Checks if the word is uncountable; returns as-is if true.
+                - Matches against irregular word mappings.
+                - Applies regular singularization rules using defined patterns.
+                - **Example Usage:**
+                - ```php
+                  str::singular("children"); // Output: "child"
+                  str::singular("mice"); // Output: "mouse"
+                  ```                  
 ## Config Directory (config/)
 
 - **Config (`config/`)**: contains configuration files for managing environment settings, database connections, and other system parameters.
@@ -370,7 +532,7 @@ This route definition would map a GET request to `/home` to the `index` method i
 
 ---
 
-## Installation
+## 📥 Installation
 
 To set up **MVCStructure** on your local environment, follow these steps:
 
@@ -412,7 +574,7 @@ To set up **MVCStructure** on your local environment, follow these steps:
 
 ---
 
-## Contributing
+## 🤝 Contributing
 
 Contributions are welcome! Here’s how to get started:
 
@@ -435,12 +597,10 @@ Please ensure that your code follows best practices and includes documentation f
 
 ---
 
-## License
+## 📄 License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ---
 
 Thank you for using **MVCStructure**!
-
-## The rest of the documentation will be written soon
