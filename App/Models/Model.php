@@ -19,11 +19,11 @@ abstract class Model
     return app()->db->update($column, $value, $attributes);
   }
 
-  public static function delete($id)
+  public static function delete($column, $value)
   {
     self::$instance = static::class;
 
-    return app()->db->delete($id);
+    return app()->db->delete($column, $value);
   }
 
   public static function all()

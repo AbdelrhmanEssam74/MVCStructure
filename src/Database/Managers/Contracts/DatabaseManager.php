@@ -14,5 +14,5 @@ interface DatabaseManager
 
   public function update($column, $value, $data);
 
-  public function delete($columns);
+  public function delete($columns, $value);
 }

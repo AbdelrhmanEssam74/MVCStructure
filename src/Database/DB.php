@@ -41,9 +41,9 @@ class DB
     return $this->manager->update($column, $value, $attributes);
   }
 
-  protected function delete($id): mixed
+  protected function delete($column, $value): mixed
   {
-    return $this->manager->delete($id);
+    return $this->manager->delete($column, $value);
   }
 
   public function __call($method, $args)

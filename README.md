@@ -12,8 +12,8 @@ It includes routing, configuration, validation, and asset management to help you
 
 - [Project Overview](##project-overview)
 - [Directory Structure](#directory-structure)
-- [Installation](#installation)
 - [Directory Overview](#DirectoryOverview)
+- [Installation](#installation)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -80,6 +80,26 @@ $ php -S localhost:8000
 - **Models (`App/models/`)**: contains all the classes responsible for handling data logic and database communication. Models interact with the database, perform CRUD operations, and structure the data for the application
 
 ```php
+// Implement Your Models Using abstract class Model
+abstract class Model
+{
+  public static function create($data){}
+  public static function update($column, $value, array $attributes)
+  {}
+  public static function delete($id){}
+
+  public static function all()
+  {
+    self::$instance = static::class;
+    return app()->db->read();
+  }
+
+  public static function where($filter, $columns = "*")
+  {
+    self::$instance = static::class;
+    return app()->db->read($columns, $filter);
+  }
+}
 // Example of a User Model
 namespace App\Models;
 
@@ -95,14 +115,30 @@ class User {
 - **Controllers (`App/controller/`)**: Handles the application logic by processing incoming requests, retrieving data from models, and determining the appropriate views to render. Controllers act as intermediaries between models and views.
 
 ```php
-// Example of a Controller
+// Namespace declaration for the controller
 namespace App\Controller;
 
 class HomeController {
+
+    /**
+     * Handles the logic for the home page.
+     *
+     * This method prepares data and renders a view. You can pass data
+     * to the view using the `extract()` function, enabling variables
+     * to be accessible in the view file.
+     */
     public function index() {
-      return View::makeView("filename");
-      or
-      return View::makeView("folder.filenames");
+        // Define the data to be passed to the view
+        $data = [
+            'key' => 'value'
+        ];
+
+        // Render a view file. You can specify the file using:
+        // - A direct filename: "filename"
+        // - A path within a folder: "folder.filename"
+        return View::makeView("filename" , $data); // Single file
+        // OR
+        return View::makeView("folder.filename" , $data); // File within a folder
     }
 }
 
@@ -177,6 +213,7 @@ The `src/` directory houses the core framework functionality and reusable compon
       ```
 
 - **📁 Database**: Handles database connections, grammars, and query management.
+
 - **📁 Support**: Additional helper classes or utilities that support the application.
 
 ## Config Directory (config/)
