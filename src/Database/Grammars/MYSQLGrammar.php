@@ -32,9 +32,9 @@ class MYSQLGrammar
     return $query;
   }
 
-  public static function buildDeleteQuery(): string
+  public static function buildDeleteQuery($column): string
   {
-    return "DELETE FROM " . Model::getTableName() . " WHERE `user_id` = ?";
+    return "DELETE FROM " . Model::getTableName() . " WHERE {$column} = ?";
   }
 
   public static function buildUpdateQuery($column, $keys): string

@@ -73,11 +73,11 @@ class MYSQLManager implements DatabaseManager
     return $stm->execute();
   }
 
-  public function delete($id)
+  public function delete($column, $value)
   {
-    $query = MYSQLGrammar::buildDeleteQuery();
+    $query = MYSQLGrammar::buildDeleteQuery($column);
     $stm = self::$instance->prepare($query);
-    $stm->bindValue(1, $id);
+    $stm->bindValue(1, $value);
     return $stm->execute();
   }
 }
