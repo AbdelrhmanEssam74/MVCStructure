@@ -83,27 +83,49 @@ $ php -S localhost:8000
 // Implement Your Models Using abstract class Model
 abstract class Model
 {
-  public static function create($data){}
-  public static function update($column, $value, array $attributes)
-  {}
-  public static function delete($id){}
-
-  public static function all()
-  {
-    self::$instance = static::class;
-    return app()->db->read();
-  }
-
-  public static function where($filter, $columns = "*")
-  {
-    self::$instance = static::class;
-    return app()->db->read($columns, $filter);
-  }
+     /**
+     * Create a new row in the database table.
+     * @param array $data Key-value pairs representing column names and their respective values.
+     * Example: ['column_name' => 'value']
+     */
+    public static function create(array[])
+    
+     /**
+     * Update existing records in the database.
+     * @param string $whereColumn Column name for the WHERE clause.
+     * @param mixed $value Value to filter the records by.
+     * @param array $data Key-value pairs for columns to be updated.
+     * Example: ['column_to_update' => 'new_value']
+     */
+    public static function update(string $whereColumn, $value, array $data)
+    
+     /**
+     * Delete records from the database.
+     * @param string $whereColumn Column name for the WHERE clause.
+     * @param mixed $value Value to filter the records by.
+     */
+    public static function delete(string $whereColumn, $value) 
+    
+     /**
+     * Fetch all records from the database.
+     * @return  List of all records.
+     */
+    public static function all()
+    
+     /**
+     * Fetch specific records based on filter conditions.
+     * @param array|string $columns Columns to retrieve (e.g., ["column1", "column2"]) or '*' for all columns.
+     * @param array $filter Filter conditions as ["column", "operator", "value"].
+     * Example: ["age", ">", "18"]
+     * @return  List of filtered records.
+     */
+    public static function where($columns = '*', array $filter = [])
 }
 // Example of a User Model
 namespace App\Models;
 
 class User {
+    // Create your methods
     public function getAll() {
         // Fetch all users from the database
     }
@@ -126,6 +148,7 @@ class HomeController {
      * This method prepares data and renders a view. You can pass data
      * to the view using the `extract()` function, enabling variables
      * to be accessible in the view file.
+     * access the key in the view file as a variable ($key)
      */
     public function index() {
         // Define the data to be passed to the view

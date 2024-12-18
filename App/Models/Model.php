@@ -32,7 +32,7 @@ abstract class Model
     return app()->db->read();
   }
 
-  public static function where($filter, $columns = "*")
+  public static function where($columns = "*",$filter)
   {
     self::$instance = static::class;
     return app()->db->read($columns, $filter);
