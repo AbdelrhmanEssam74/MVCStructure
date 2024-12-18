@@ -242,16 +242,16 @@ The `src/` directory houses the core framework functionality and reusable compon
 ## Config Directory (config/)
 
 - **Config (`config/`)**: contains configuration files for managing environment settings, database connections, and other system parameters.
-
-```php
-return [
-  'default'   => env("DB_DRIVER", ''),
-  'localhost' => env("DB_HOST", ''),
-  'database'  => env("DB_DATABASE", ''),
-  'username'  => env('DB_USERNAME', 'root'),
-  'password'  => env('DB_PASSWORD', ''),
-];
-```
+  - *database.php*
+    ```php
+    return [
+    'default'   => env("DB_DRIVER", ''),
+    'localhost' => env("DB_HOST", ''),
+    'database'  => env("DB_DATABASE", ''),
+    'username'  => env('DB_USERNAME', 'root'),
+    'password'  => env('DB_PASSWORD', ''),
+    ];
+    ```
 
 ## Database Directory (database/)
 
