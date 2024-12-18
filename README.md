@@ -291,7 +291,15 @@ The `src/` directory houses the core framework functionality and reusable compon
           - Accepts the recipient's email address, subject line, and message body as parameters.
           - Automatically sets the character set to UTF-8 and enables HTML content.
           - Provides error handling with detailed error messages if email sending fails.
-  - *Hash.php*
+  - ***Hash.php***
+    The `Hash.php` file provides a utility class for handling password hashing, verification, and token generation. This class ensures secure password storage and easy validation for authentication systems.
+    - *Key Features*:
+      - Password Hashing:
+        - Utilizes the `PASSWORD_BCRYPT` algorithm for secure password hashing.
+      - Password Verification:
+        - Compares a `plain-text` password with its `hashed` counterpart to confirm validity.
+      - Token Generation:
+        - Generates a unique token using `SHA-1` encryption and a timestamp.
   - *Helpers.php*
   - *Sessions.php*
   - *Str.php*
