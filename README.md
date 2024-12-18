@@ -75,7 +75,7 @@ $ cd Public
 $ php -S localhost:8000
 ```
 
-## Models Directory (App/controller/)
+## Models Directory (App/models/)
 
 - **Models (`App/models/`)**: contains all the classes responsible for handling data logic and database communication. Models interact with the database, perform CRUD operations, and structure the data for the application
 
