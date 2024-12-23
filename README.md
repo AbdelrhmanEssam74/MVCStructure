@@ -4,7 +4,7 @@
 
 **MVCStructure** is a clean and well-organized implementation of the **Model-View-Controller (MVC)** design pattern. This project promotes **separation of concerns** by dividing application functionality into **Models**, **Views**, and **Controllers**, making your codebase maintainable, scalable, and easy to navigate.
 
-It includes routing, configuration, validation, and asset management to help you build full-featured web applications efficiently.
+It includes routing, configuration, validation, and asset management to help you build full-featured web applications efficiently
 
 ---
 
