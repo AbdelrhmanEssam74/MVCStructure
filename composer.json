@@ -9,6 +9,7 @@
   "require": {
     "vlucas/phpdotenv": "^5.6",
     "phpmailer/phpmailer": "^6.9",
-    "eftec/bladeone": "^4.16"
+    "eftec/bladeone": "^4.16",
+    "illuminate/view": "^11.36"
   }
 }
