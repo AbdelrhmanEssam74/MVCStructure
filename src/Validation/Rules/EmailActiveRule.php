@@ -21,6 +21,7 @@ class EmailActiveRule implements Rules
 
   public function __toString()
   {
-    return "You Must Activate Your Account!  <strong><a data-bs-toggle='modal' data-bs-target='#exampleModal' data-whatever='@mdo'  href='#'>Active</a></strong>";
+    $message = app()->lang->get(getLanguage())['validation']['email-not-active'];
+    return "{$message} .  <strong><a data-bs-toggle='modal' data-bs-target='#exampleModal' data-whatever='@mdo'  href='#'>Active</a></strong>";
   }
 }

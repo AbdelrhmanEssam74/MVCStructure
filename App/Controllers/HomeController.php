@@ -6,8 +6,11 @@ use PROJECT\View\View;
 
 class HomeController
 {
-    public function index(): null
-    {
-        return View::makeView("index");
-    }
+  public function index(): null
+  {
+    $data = array(
+      'translation' => app()->lang->get(getLanguage()),
+    );
+    return View::makeView("index", $data);
+  }
 }

@@ -12,12 +12,15 @@ Here's the `README.md` with code blocks and comments integrated into the structu
 
 ## Table of Contents
 
-- [Project Overview](#project-overview)
-- [Directory Structure](#directory-structure)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
+- [MVCStructure](#mvcstructure)
+  - [Project Overview (not finished yet)](#project-overview-not-finished-yet)
+  - [Table of Contents](#table-of-contents)
+  - [Directory Structure](#directory-structure)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Contributing](#contributing)
+  - [License](#license)
+  - [The rest of the documentation will be written soon](#the-rest-of-the-documentation-will-be-written-soon)
 
 ---
 
@@ -37,7 +40,7 @@ Below is the directory structure of **MVCStructure**:
 │   └── assets/                # Directory for static assets
 │       ├── css/               # Stores cascading style sheets
 │       ├── js/                # Stores JavaScript files
-│       ├── fonts/             # stores fonts files
+│       ├── lang/              # Stores language files
 │       └── images/            # Stores image assets
 ├── routes/                    # Contains route definitions for the application
 ├── src/                       # Source code directory

@@ -2,7 +2,6 @@
 
 namespace PROJECT;
 
-use mysql_xdevapi\Session;
 use PROJECT\Database\DB;
 use PROJECT\Database\Managers\MYSQLManager;
 use PROJECT\Database\Managers\SQLITEManager;
@@ -11,6 +10,7 @@ use PROJECT\HTTP\Response;
 use PROJECT\HTTP\Route;
 use PROJECT\support\Config;
 use PROJECT\support\Sessions;
+use PROJECT\support\Languages;
 
 class Application
 {
@@ -20,7 +20,7 @@ class Application
   protected Config $config;
   protected DB $db;
   protected Sessions $session;
-
+  protected Languages $lang;
   public function __construct()
   {
     $this->request = new Request();
@@ -29,6 +29,7 @@ class Application
     $this->route = new Route($this->request, $this->response);
     $this->config = new Config($this->loadConfig());
     $this->db = new DB($this->getDBDriver());
+    $this->lang = new Languages($this->loadLanguageSupport());
   }
 
   protected function getDBDriver(): SQLITEManager|MYSQLManager
@@ -40,6 +41,18 @@ class Application
     };
   }
 
+  protected function loadLanguageSupport(): array
+  {
+    $lang = [];
+    foreach (scandir(lang_path()) as $file) {
+      if ($file == "." || $file == ".." || $file == "...") {
+        continue;
+      }
+      $fileName = explode(".", $file)[0];
+      $lang[$fileName] = require_once lang_path() . $file;
+    }
+    return $lang;
+  }
   protected function loadConfig(): array
   {
     $config = [];

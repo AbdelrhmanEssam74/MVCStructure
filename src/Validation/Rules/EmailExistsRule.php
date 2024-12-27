@@ -23,6 +23,7 @@ class EmailExistsRule implements Contract\Rules
 
   public function __toString()
   {
-    return "Email Not Exists";
+    $message = app()->lang->get(getLanguage())['validation']['email-not-exist'];
+    return "{$message}";
   }
 }

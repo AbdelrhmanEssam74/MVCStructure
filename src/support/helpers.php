@@ -35,9 +35,11 @@ endif;
 if (!function_exists("base_path")):
   function base_path(): string
   {
-    return dirname(__DIR__) . '/../';
+    // Navigate two levels up from the src/support directory
+    return realpath(__DIR__ . '/../../') . '/';
   }
 endif;
+
 
 /**
  * @description
@@ -107,6 +109,12 @@ if (!function_exists("config_path")) {
     return base_path() . 'config/';
   }
 }
+if (!function_exists("lang_path")) {
+  function lang_path(): string
+  {
+    return base_path() . 'public/assets/lang/';
+  }
+}
 if (!function_exists("config")) {
   function config($key = null, $default = null)
   {
@@ -122,12 +130,13 @@ if (!function_exists("config")) {
 if (!function_exists("RedirectTo")) {
   function RedirectToView($path): void
   {
-    header("Location:" . env('HOST') . $path);
+    header("Location:" . $path);
   }
 }
 
+
 if (!function_exists('getCurrentDate')) {
-  function getCurrentDate(string $selector = "Y:m:d h:s:i"): string
+  function getCurrentDate(string $selector): string
   {
     return date($selector);
   };
@@ -137,4 +146,59 @@ if (!function_exists('GenerateAuthCode')) {
   {
     return rand(100000, 999999); // Generate a 6-digit random code
   };
+}
+if (!function_exists('getLanguage')) {
+  function getLanguage()
+  {
+    // Check if language is passed in the URL
+    if (!empty($_GET['lang'])) {
+      $lang = $_GET['lang'];
+      // Store the language in the session
+      app()->session->set('lang', $lang);
+    }
+    // Check if the language is set in the session
+    elseif (app()->session->exists('lang')) {
+      $lang = app()->session->get('lang');
+    }
+    // Check if the language is stored in a cookie (to persist across sessions)
+    elseif (isset($_COOKIE['lang'])) {
+      $lang = $_COOKIE['lang'];
+    } else {
+      // Default to English if no language is found
+      $lang = 'en';
+    }
+    // Store the language in a cookie to persist for 1 year (365 days)
+    setcookie('lang', $lang, time() + (365 * 24 * 60 * 60), "/");  // 365 days
+    return $lang;
+  }
+}
+
+if (!function_exists("getClientIp")) {
+  // Function to get the client IP address
+  function getClientIp()
+  {
+    $ipaddress = 'UNKNOWN';
+    if (isset($_SERVER['HTTP_CLIENT_IP'])) {
+      $ipaddress = $_SERVER['HTTP_CLIENT_IP'];
+    } elseif (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+      // Split multiple IPs in the X-Forwarded-For header
+      $ip_list = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
+      foreach ($ip_list as $ip) {
+        $ip = trim($ip); // Remove any extra spaces
+        if (filter_var($ip, FILTER_VALIDATE_IP)) {
+          $ipaddress = $ip;
+          break; // Take the first valid IP address
+        }
+      }
+    } elseif (isset($_SERVER['HTTP_X_FORWARDED'])) {
+      $ipaddress = $_SERVER['HTTP_X_FORWARDED'];
+    } elseif (isset($_SERVER['HTTP_FORWARDED_FOR'])) {
+      $ipaddress = $_SERVER['HTTP_FORWARDED_FOR'];
+    } elseif (isset($_SERVER['HTTP_FORWARDED'])) {
+      $ipaddress = $_SERVER['HTTP_FORWARDED'];
+    } elseif (isset($_SERVER['REMOTE_ADDR'])) {
+      $ipaddress = $_SERVER['REMOTE_ADDR'];
+    }
+    return $ipaddress;
+  }
 }

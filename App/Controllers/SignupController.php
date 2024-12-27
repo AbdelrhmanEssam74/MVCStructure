@@ -11,7 +11,7 @@ use PROJECT\support\Hash;
 
 class SignupController
 {
-  public function index(): null
+  public function index()
   {
     $csrfToken = Hash::makeToken(date('Y-m-d H:i:s'));
     $security = array(
