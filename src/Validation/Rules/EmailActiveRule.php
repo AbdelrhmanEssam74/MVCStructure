@@ -16,7 +16,7 @@ class EmailActiveRule implements Rules
   }
   public function apply($field, $value, $data): false|int
   {
-    return (app()->db->row("SELECT {$this->column} FROM {$this->table} WHERE email = ?", [request('email')])[0]->active);
+    return (app()->db->row("SELECT {$this->column} FROM {$this->table} WHERE email = ?", [request('email')])[0]->active) ?? false;
   }
 
   public function __toString()
