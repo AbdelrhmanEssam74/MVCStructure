@@ -11,6 +11,7 @@ use PROJECT\HTTP\Route;
 use PROJECT\support\Config;
 use PROJECT\support\Sessions;
 use PROJECT\support\Languages;
+use eftec\bladeone\BladeOne;
 
 class Application
 {
@@ -21,6 +22,7 @@ class Application
   protected DB $db;
   protected Sessions $session;
   protected Languages $lang;
+  protected BladeOne $blade;
   public function __construct()
   {
     $this->request = new Request();
@@ -40,31 +42,29 @@ class Application
       default => new MYSQLManager
     };
   }
+  protected function loadFiles(string $path): array
+  {
+    $data = [];
+    foreach (scandir($path) as $file) {
+      if ($file === "." || $file === ".." || pathinfo($file, PATHINFO_EXTENSION) !== 'php') {
+        continue;
+      }
+      $key = pathinfo($file, PATHINFO_FILENAME);
+      $data[$key] = require $path . $file;
+    }
+    return $data;
+  }
+
+  protected function loadConfig(): array
+  {
+    return $this->loadFiles(config_path());
+  }
 
   protected function loadLanguageSupport(): array
   {
-    $lang = [];
-    foreach (scandir(lang_path()) as $file) {
-      if ($file == "." || $file == ".." || $file == "...") {
-        continue;
-      }
-      $fileName = explode(".", $file)[0];
-      $lang[$fileName] = require_once lang_path() . $file;
-    }
-    return $lang;
+    return $this->loadFiles(lang_path());
   }
-  protected function loadConfig(): array
-  {
-    $config = [];
-    foreach (scandir(config_path()) as $file) {
-      if ($file == "." || $file == "..") {
-        continue;
-      }
-      $fileName = explode(".", $file)[0];
-      $config[$fileName] = require config_path() . $file;
-    }
-    return $config;
-  }
+
 
 
   public function run(): void
@@ -78,5 +78,6 @@ class Application
     if (property_exists($this, $name)) {
       return $this->$name;
     }
+    throw new \InvalidArgumentException("Property '{$name}' does not exist in " . __CLASS__);
   }
 }

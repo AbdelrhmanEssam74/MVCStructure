@@ -51,6 +51,12 @@ if (!function_exists("view_path")):
     return base_path() . 'views/';
   }
 endif;
+if (!function_exists("cache_path")):
+  function cache_path(): string
+  {
+    return base_path() . 'cache/';
+  }
+endif;
 
 if (!function_exists("old")) {
   function old($key)
