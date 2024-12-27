@@ -22,7 +22,6 @@ class Application
   protected DB $db;
   protected Sessions $session;
   protected Languages $lang;
-  protected BladeOne $blade;
   public function __construct()
   {
     $this->request = new Request();
@@ -33,7 +32,6 @@ class Application
     $this->db = new DB($this->getDBDriver());
     $this->lang = new Languages($this->loadLanguageSupport());
   }
-
   protected function getDBDriver(): SQLITEManager|MYSQLManager
   {
     return match (env("DB_DRIVER")) {
